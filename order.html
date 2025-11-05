@@ -430,7 +430,11 @@
         return;
       }
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const table = urlParams.get("table") || "Unknown";
+
       const order = {
+        table: table,
         items: cart,
         total: cart.reduce((sum, i) => sum + i.price * i.qty, 0),
         time: new Date().toLocaleString()

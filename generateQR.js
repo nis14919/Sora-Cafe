@@ -1,13 +1,13 @@
-// ✅ QR Code Generator for Café Tables
-// Author: Harshil Cafe System
+// ✅ QR Code Generator for Café Tables (simple clean version)
+// Author: Harshil Café System
 
-const QRCode = require("qrcode"); // ensure installed via: npm install qrcode
+const QRCode = require("qrcode"); // npm install qrcode
 
 // 🪑 Total tables in your café
-const totalTables = 20;
+const totalTables = 10;
 
-// 🌐 Your live website URL (no trailing slash)
-const baseURL = "https://cafe-oreder-system.onrender.com";
+// 🌐 Your live deployed URL (no trailing slash)
+const baseURL = "https://sora-cafe.onrender.com";
 
 console.log("🚀 Generating QR codes...");
 
@@ -19,7 +19,7 @@ console.log("🚀 Generating QR codes...");
     try {
       await QRCode.toFile(fileName, url, {
         color: {
-          dark: "#000000",  // QR color
+          dark: "#000000", // QR dots color
           light: "#ffffff", // background color
         },
         width: 400,
@@ -31,6 +31,6 @@ console.log("🚀 Generating QR codes...");
     }
   }
 
-  console.log("\n🎉 All QR codes created successfully!");
-  console.log("📁 Check your project folder for 'qr_table_1.png', 'qr_table_2.png', etc.");
+  console.log("\n🎉 All 10 QR codes created successfully!");
+  console.log("📁 Check your folder for files: qr_table_1.png → qr_table_10.png");
 })();
