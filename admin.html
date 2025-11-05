@@ -35,7 +35,6 @@
       width: 280px;
       text-align: left;
       color: #f1c40f;
-      box-shadow: 0 0 8px rgba(241,196,15,0.2);
     }
     button {
       background-color: #f1c40f;
@@ -46,9 +45,9 @@
       cursor: pointer;
       margin-top: 10px;
     }
-    button:hover {
-      background-color: #ffdb4d;
-    }
+    button:hover { background-color: #ffdb4d; }
+    .status-new { color: #ffb84d; }
+    .status-completed { color: #00e676; }
   </style>
 </head>
 <body>
@@ -57,7 +56,7 @@
 
   <script>
     async function loadOrders() {
-      const res = await fetch("/orders");
+      const res = await fetch("/orders"); // ✅ correct route
       const data = await res.json();
       const container = document.getElementById("orders");
       container.innerHTML = "";
@@ -71,11 +70,11 @@
         const div = document.createElement("div");
         div.className = "order";
         div.innerHTML = `
-          <h3>🧾 Order #${index + 1}</h3>
-          <p><strong>Items:</strong> ${order.items.map(i => `${i.name} x${i.qty}`).join(", ")}</p>
+          <h3>🪑 Table: ${order.table || "Unknown"}</h3>
+          <p><strong>Items:</strong> ${order.items.map(i => `${i.name} (x${i.qty})`).join(", ")}</p>
           <p><strong>Total:</strong> ₹${order.total}</p>
-          <p><strong>Time:</strong> ${new Date(order.time).toLocaleString()}</p>
-          <button onclick="deleteOrder(${index})">Mark Completed</button>
+          <p><strong>Time:</strong> ${order.time}</p>
+          <button onclick="deleteOrder(${index})">✅ Mark Completed</button>
         `;
         container.appendChild(div);
       });
@@ -87,7 +86,7 @@
     }
 
     loadOrders();
-    setInterval(loadOrders, 5000);
+    setInterval(loadOrders, 5000); // auto refresh every 5 sec
   </script>
 </body>
 </html>
