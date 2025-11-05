@@ -294,34 +294,36 @@
     }
 
     async function placeOrder() {
-      if (cart.length === 0) {
-        alert("Please add some items before placing an order!");
-        return;
-      }
+  if (cart.length === 0) {
+    alert("Please add some items before placing an order!");
+    return;
+  }
 
-      const urlParams = new URLSearchParams(window.location.search);
-      const table = urlParams.get("table") || "Unknown";
+  // ✅ Get table number from QR URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const table = urlParams.get("table") || "Unknown";
 
-      const order = {
-        table: table,
-        items: cart,
-        total: cart.reduce((sum, i) => sum + i.price * i.qty, 0),
-        time: new Date().toLocaleString()
-      };
+  const order = {
+    table: table, // 🪑 Send table no to server
+    items: cart,
+    total: cart.reduce((sum, i) => sum + i.price * i.qty, 0),
+    time: new Date().toLocaleString()
+  };
 
-      try {
-        await fetch("/order", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(order)
-        });
-        alert(`✅ Order placed successfully for Table ${table}!`);
-        cart = [];
-        renderCart();
-      } catch (err) {
-        alert("❌ Failed to place order. Please try again.");
-      }
-    }
+  try {
+    await fetch("/order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(order)
+    });
+    alert(`✅ Order placed successfully for Table ${table}!`);
+    cart = [];
+    renderCart();
+  } catch (err) {
+    alert("❌ Failed to place order. Please try again.");
+  }
+}
+
 
     searchInput.addEventListener('input', function() {
       const query = this.value.toLowerCase();

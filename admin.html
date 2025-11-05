@@ -71,7 +71,7 @@
         div.className = "order";
         div.innerHTML = `
           <h3>📄 Order #${index + 1}</h3>
-          <p><strong>Table:</strong> ${order.table || "Unknown"}</p>
+          <p><strong>🪑 Table:</strong> ${order.table || "Unknown"}</p>
           <p><strong>Items:</strong> ${order.items.map(i => `${i.name} x${i.qty}`).join(", ")}</p>
           <p><strong>Total:</strong> ₹${order.total}</p>
           <p><strong>Time:</strong> ${order.time}</p>
@@ -86,7 +86,6 @@
       loadOrders();
     }
 
-    // Load orders initially and refresh every 5 seconds
     loadOrders();
     setInterval(loadOrders, 5000);
   </script>
